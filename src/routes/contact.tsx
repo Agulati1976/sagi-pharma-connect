@@ -26,6 +26,22 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
+  const [prefill, setPrefill] = useState<{ subject: string; message: string }>({
+    subject: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get("product");
+    if (product) {
+      setPrefill({
+        subject: `Enquiry about ${product}`,
+        message: `Hello SAGI Pharmaceutical team,\n\nI'd like more information about ${product}.\n\nThank you.`,
+      });
+    }
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,6 +50,7 @@ function Contact() {
       setSubmitting(false);
       toast.success("Thanks! We'll get back to you within 1-2 business days.");
       (e.target as HTMLFormElement).reset();
+      setPrefill({ subject: "", message: "" });
     }, 600);
   }
 
