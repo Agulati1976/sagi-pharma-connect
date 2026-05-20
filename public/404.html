@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAGI Pharmaceutical</title>
+  <script>
+    // SPA fallback: preserve the original path and redirect through index.html
+    var redirect = sessionStorage.getItem('spa-redirect');
+    if (redirect) {
+      sessionStorage.removeItem('spa-redirect');
+      history.replaceState(null, null, redirect);
+    } else {
+      // Save current path and go to root so the SPA can handle routing client-side
+      var path = window.location.pathname + window.location.search + window.location.hash;
+      if (path !== '/' && path !== '/index.html') {
+        sessionStorage.setItem('spa-redirect', path);
+        window.location.href = '/';
+      }
+    }
+  </script>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #0c1e3c; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .loader { text-align: center; }
+    .spinner { width: 48px; height: 48px; border: 4px solid rgba(132,204,22,0.2); border-top-color: #84cc16; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="spinner"></div>
+    <p>Loading SAGI Pharmaceutical…</p>
+  </div>
+</body>
+</html>
