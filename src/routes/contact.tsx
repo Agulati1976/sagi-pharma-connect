@@ -176,7 +176,7 @@ function Contact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" name="message" required rows={5} placeholder="Tell us how we can help..." />
+                  <Textarea id="message" name="message" defaultValue={prefill.message} key={`m-${prefill.subject}`} required rows={5} placeholder="Tell us how we can help..." />
                 </div>
                 <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitting}>
                   {submitting ? "Sending..." : (<>Send Message <Send className="ml-2 h-4 w-4" /></>)}
