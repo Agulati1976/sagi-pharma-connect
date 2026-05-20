@@ -86,7 +86,7 @@ function Home() {
               <h1 className="mt-5 text-4xl font-bold leading-[1.05] md:text-6xl">
                 Your Health,
                 <br />
-                <span className="text-primary-glow">Our Commitment.</span>
+                <span className="text-brand-lime">Our Commitment.</span>
               </h1>
               <p className="mt-6 max-w-lg text-base text-white/80 md:text-lg">
                 SAGI Pharmaceutical brings you a comprehensive portfolio of
