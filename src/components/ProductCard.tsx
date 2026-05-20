@@ -100,13 +100,12 @@ export function ProductCard({ product }: { product: Product }) {
               Close
             </Button>
             <Button asChild>
-              <Link
-                to="/contact"
-                search={{ product: product.name }}
+              <a
+                href={`/contact?product=${encodeURIComponent(product.name)}`}
                 onClick={() => setOpen(false)}
               >
                 <Mail className="mr-2 h-4 w-4" /> Enquire Now
-              </Link>
+              </a>
             </Button>
           </DialogFooter>
         </DialogContent>
