@@ -14,7 +14,22 @@ const serverEntry = path.join(serverDir, "index.js");
 const tempDir = path.join(root, ".hostinger-dist-temp");
 
 // Edit this list to add more routes to prerender.
-const routes = ["/", "/about", "/contact", "/products"];
+const staticRoutes = ["/", "/about", "/contact", "/products"];
+
+// Derive product detail routes from the source data so every product gets a static page.
+async function loadProductRoutes() {
+  try {
+    const mod = await import(pathToFileURL(path.join(root, "src/data/products.ts")).href);
+    const list = mod.products ?? [];
+    const slugify = mod.slugify ?? ((s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""));
+    return list.map((p) => `/products/${slugify(p.name)}`);
+  } catch (err) {
+    console.warn("[hostinger] could not load product routes:", err?.message ?? err);
+    return [];
+  }
+}
+
+const routes = [...staticRoutes, ...(await loadProductRoutes())];
 
 async function safeRemove(target) {
   await rm(target, { recursive: true, force: true });
