@@ -16,7 +16,7 @@ export default defineConfig({
     prerender: {
       enabled: true,
       crawlLinks: true,
-      filter: ({ path }) => !path.startsWith("/api"),
+      filter: ({ path }: { path: string }) => !path.startsWith("/api"),
     },
     pages: [
       { path: "/" },
