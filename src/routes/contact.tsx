@@ -172,7 +172,7 @@ function Contact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" name="subject" placeholder="Distribution inquiry, product info, etc." />
+                  <Input id="subject" name="subject" defaultValue={prefill.subject} key={prefill.subject} placeholder="Distribution inquiry, product info, etc." />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
