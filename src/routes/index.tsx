@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
+import heroImage from "@/assets/hero-pharma.jpg";
 import {
   ArrowRight,
   Bone,
