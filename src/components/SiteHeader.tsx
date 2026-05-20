@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, Phone, Mail, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -17,6 +17,24 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-md">
+      <div className="bg-primary text-primary-foreground">
+        <div className="container mx-auto flex h-9 items-center justify-between gap-4 px-4 text-xs md:px-6">
+          <div className="flex items-center gap-4">
+            <a href="tel:9555864204" className="flex items-center gap-1.5 transition-opacity hover:opacity-80">
+              <Phone className="h-3.5 w-3.5" />
+              <span>+91 95558 64204</span>
+            </a>
+            <a href="mailto:info@sagipharmaceutical.com" className="hidden items-center gap-1.5 transition-opacity hover:opacity-80 sm:flex">
+              <Mail className="h-3.5 w-3.5" />
+              <span>info@sagipharmaceutical.com</span>
+            </a>
+          </div>
+          <div className="hidden items-center gap-1.5 md:flex">
+            <MapPin className="h-3.5 w-3.5" />
+            <span>Delhi, India</span>
+          </div>
+        </div>
+      </div>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Logo />
         <nav className="hidden items-center gap-8 md:flex">
