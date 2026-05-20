@@ -112,6 +112,19 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const router = useRouter();
+
+  // Hostinger 404.html SPA fallback: restore original URL if we arrived via redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const redirect = sessionStorage.getItem("spa-redirect");
+    if (redirect) {
+      sessionStorage.removeItem("spa-redirect");
+      if (redirect !== pathname && redirect !== "/") {
+        router.navigate({ to: redirect, replace: true });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
