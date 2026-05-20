@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 import { products, categories, type ProductCategory } from "@/data/products";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — SAGI Pharmaceutical" },
