@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,22 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
+  const [prefill, setPrefill] = useState<{ subject: string; message: string }>({
+    subject: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get("product");
+    if (product) {
+      setPrefill({
+        subject: `Enquiry about ${product}`,
+        message: `Hello SAGI Pharmaceutical team,\n\nI'd like more information about ${product}.\n\nThank you.`,
+      });
+    }
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,6 +50,7 @@ function Contact() {
       setSubmitting(false);
       toast.success("Thanks! We'll get back to you within 1-2 business days.");
       (e.target as HTMLFormElement).reset();
+      setPrefill({ subject: "", message: "" });
     }, 600);
   }
 
@@ -155,11 +172,11 @@ function Contact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" name="subject" placeholder="Distribution inquiry, product info, etc." />
+                  <Input id="subject" name="subject" defaultValue={prefill.subject} key={prefill.subject} placeholder="Distribution inquiry, product info, etc." />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" name="message" required rows={5} placeholder="Tell us how we can help..." />
+                  <Textarea id="message" name="message" defaultValue={prefill.message} key={`m-${prefill.subject}`} required rows={5} placeholder="Tell us how we can help..." />
                 </div>
                 <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitting}>
                   {submitting ? "Sending..." : (<>Send Message <Send className="ml-2 h-4 w-4" /></>)}
