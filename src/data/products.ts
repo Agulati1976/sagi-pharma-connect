@@ -18,6 +18,100 @@ export interface Product {
   tagline?: string;
 }
 
+export function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => slugify(p.name) === slug);
+}
+
+export const categoryInfo: Record<
+  ProductCategory,
+  { description: string; indications: string[] }
+> = {
+  "Bone & Joint": {
+    description:
+      "Formulations supporting bone density, joint mobility and connective tissue health.",
+    indications: [
+      "Osteoporosis and osteopenia management",
+      "Calcium and Vitamin D3 deficiency",
+      "Joint pain, stiffness and cartilage support",
+      "Post-menopausal bone health",
+    ],
+  },
+  Gastro: {
+    description:
+      "Targeted therapy for acid-related disorders, GI motility and gut microbiome balance.",
+    indications: [
+      "GERD, gastritis and peptic ulcer disease",
+      "Dyspepsia, bloating and acid reflux",
+      "Antibiotic-associated diarrhea",
+      "Restoration of healthy gut flora",
+    ],
+  },
+  "Pain & Inflammation": {
+    description:
+      "Fast-acting analgesic and anti-inflammatory combinations for acute and chronic pain.",
+    indications: [
+      "Musculoskeletal pain and muscle spasm",
+      "Post-operative and post-traumatic inflammation",
+      "Arthritis and soft tissue injuries",
+      "Dental and back pain",
+    ],
+  },
+  Neuro: {
+    description:
+      "Neuropathic pain and CNS-modulating formulations for peripheral and central indications.",
+    indications: [
+      "Diabetic peripheral neuropathy",
+      "Post-herpetic neuralgia",
+      "Fibromyalgia and chronic nerve pain",
+      "Adjunctive therapy in partial seizures",
+    ],
+  },
+  "Anti-Infective": {
+    description:
+      "Broad and targeted antimicrobial therapy for systemic and superficial infections.",
+    indications: [
+      "Fungal infections of skin, nails and mucosa",
+      "Systemic mycoses",
+      "Recurrent and resistant infections",
+    ],
+  },
+  Nutraceutical: {
+    description:
+      "Evidence-based nutritional and antioxidant support for everyday wellness and recovery.",
+    indications: [
+      "General wellness and immunity",
+      "Iron deficiency anemia",
+      "Oxidative stress and fatigue",
+      "Adjuvant care in chronic conditions",
+    ],
+  },
+  Respiratory: {
+    description:
+      "Mucolytic, bronchodilator and expectorant therapy for productive and dry cough.",
+    indications: [
+      "Productive cough with thick mucus",
+      "Bronchitis and bronchospasm",
+      "Upper and lower respiratory tract infections",
+    ],
+  },
+  Allergy: {
+    description:
+      "Antihistamine and leukotriene-modifier therapy for allergic and asthmatic conditions.",
+    indications: [
+      "Allergic rhinitis (seasonal and perennial)",
+      "Chronic urticaria and skin allergies",
+      "Mild persistent asthma",
+    ],
+  },
+};
+
 export const products: Product[] = [
   {
     name: "Q-SAG-PLUS",
