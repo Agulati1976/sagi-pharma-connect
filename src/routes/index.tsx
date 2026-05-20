@@ -63,11 +63,21 @@ function Home() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden">
+          <img
+            src={heroImage}
+            alt="SAGI Pharmaceutical research laboratory"
+            width={1920}
+            height={1080}
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+          />
           <div
             className="absolute inset-0 -z-10"
-            style={{ background: "var(--gradient-hero)" }}
+            style={{
+              background:
+                "linear-gradient(135deg, oklch(0.22 0.08 265 / 0.92) 0%, oklch(0.4 0.16 265 / 0.85) 60%, oklch(0.45 0.18 263 / 0.78) 100%)",
+            }}
           />
-          <div className="absolute inset-0 -z-10 opacity-20 [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
+          <div className="absolute inset-0 -z-10 opacity-15 [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
           <div className="container mx-auto grid gap-12 px-4 py-20 md:grid-cols-2 md:items-center md:px-6 md:py-28">
             <div className="text-primary-foreground">
               <span className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur">
