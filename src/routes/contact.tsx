@@ -211,7 +211,7 @@ function Contact() {
           <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
             <iframe
               title="SAGI Pharmaceutical location"
-              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.2721215602355!2d77.18518069999999!3d28.688368299999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03eb0b831e4d%3A0x9ed35b7c516fae84!2ssagi%20pharmacutical!5e1!3m2!1sen!2sin!4v1779270862908!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade`}
+              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.2721215602355!2d77.18518069999999!3d28.688368299999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03eb0b831e4d%3A0x9ed35b7c516fae84!2ssagi%20pharmacutical!5e1!3m2!1sen!2sin!4v1779270862908!5m2!1sen!2sin"`}
               width="100%"
               height="420"
               loading="lazy"
