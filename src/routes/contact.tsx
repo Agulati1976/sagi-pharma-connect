@@ -15,9 +15,16 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — SAGI Pharmaceutical" },
-      { name: "description", content: "Contact SAGI Pharmaceutical, Delhi. Call us, email us, or visit our office at Shakti Nagar Extn., Delhi-110007." },
+      {
+        name: "description",
+        content:
+          "Contact SAGI Pharmaceutical, Delhi. Call us, email us, or visit our office at Shakti Nagar Extn., Delhi-110007.",
+      },
       { property: "og:title", content: "Contact SAGI Pharmaceutical" },
-      { property: "og:description", content: "Reach SAGI Pharmaceutical in Delhi for inquiries, distribution and product information." },
+      {
+        property: "og:description",
+        content: "Reach SAGI Pharmaceutical in Delhi for inquiries, distribution and product information.",
+      },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),
@@ -62,20 +69,14 @@ function Contact() {
       <Toaster richColors position="top-center" />
       <main className="flex-1">
         {/* Hero */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "var(--gradient-hero)" }}
-        >
+        <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
           <div className="container mx-auto px-4 py-16 text-center text-primary-foreground md:px-6 md:py-20">
             <span className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur">
               Get in Touch
             </span>
-            <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-bold md:text-5xl">
-              We'd love to hear from you.
-            </h1>
+            <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-bold md:text-5xl">We'd love to hear from you.</h1>
             <p className="mx-auto mt-4 max-w-2xl text-white/80">
-              Whether you're a distributor, clinician, or patient — our team is
-              here to help.
+              Whether you're a distributor, clinician, or patient — our team is here to help.
             </p>
           </div>
         </section>
@@ -140,7 +141,8 @@ function Contact() {
                 <div>
                   <h3 className="font-semibold text-accent">Business Hours</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Mon – Sat: 10:00 AM – 7:00 PM<br />
+                    Mon – Sat: 10:00 AM – 7:00 PM
+                    <br />
                     Sunday: Closed
                   </p>
                 </div>
@@ -152,9 +154,7 @@ function Contact() {
           <div className="md:col-span-3">
             <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10">
               <h2 className="text-2xl font-bold text-accent">Send us a message</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Fill out the form and we'll get back to you shortly.
-              </p>
+              <p className="mt-2 text-sm text-muted-foreground">Fill out the form and we'll get back to you shortly.</p>
               <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
@@ -172,14 +172,34 @@ function Contact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" name="subject" defaultValue={prefill.subject} key={prefill.subject} placeholder="Distribution inquiry, product info, etc." />
+                  <Input
+                    id="subject"
+                    name="subject"
+                    defaultValue={prefill.subject}
+                    key={prefill.subject}
+                    placeholder="Distribution inquiry, product info, etc."
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" name="message" defaultValue={prefill.message} key={`m-${prefill.subject}`} required rows={5} placeholder="Tell us how we can help..." />
+                  <Textarea
+                    id="message"
+                    name="message"
+                    defaultValue={prefill.message}
+                    key={`m-${prefill.subject}`}
+                    required
+                    rows={5}
+                    placeholder="Tell us how we can help..."
+                  />
                 </div>
                 <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitting}>
-                  {submitting ? "Sending..." : (<>Send Message <Send className="ml-2 h-4 w-4" /></>)}
+                  {submitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      Send Message <Send className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
@@ -191,7 +211,7 @@ function Contact() {
           <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
             <iframe
               title="SAGI Pharmaceutical location"
-              src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.2721215602355!2d77.18518069999999!3d28.688368299999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03eb0b831e4d%3A0x9ed35b7c516fae84!2ssagi%20pharmacutical!5e1!3m2!1sen!2sin!4v1779270862908!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade`}
               width="100%"
               height="420"
               loading="lazy"
