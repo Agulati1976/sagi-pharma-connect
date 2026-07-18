@@ -125,7 +125,7 @@ export const categoryInfo: Record<
   },
 };
 
-export const products: Product[] = [
+const productsRaw: Product[] = [
   {
     name: "Q-SAG-PLUS",
     composition:
