@@ -57,7 +57,7 @@ if (!existsSync(clientDir) || !(await stat(clientDir)).isDirectory()) {
 }
 
 if (!existsSync(serverEntry)) {
-  console.log("Hostinger dist step skipped: dist/server/index.js missing.");
+  console.log("Hostinger dist step skipped: server entry missing at " + serverEntry);
   process.exit(0);
 }
 
