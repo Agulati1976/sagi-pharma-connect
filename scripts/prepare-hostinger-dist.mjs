@@ -1,5 +1,5 @@
-// Post-build script: prerender each route to static HTML using the built worker,
-// then flatten dist/ so it contains a Hostinger-ready static site.
+// Post-build script: prerender each route using the built server, then create
+// a clean Hostinger-ready dist/ containing static files only.
 import { cp, rm, readdir, mkdir, writeFile, stat, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -7,13 +7,23 @@ import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
-const clientDir = path.join(distDir, "client");
-const serverDir = path.join(distDir, "server");
-const buildsDir = path.join(distDir, ".builds");
-const serverEntry = existsSync(path.join(serverDir, "index.mjs"))
-  ? path.join(serverDir, "index.mjs")
-  : path.join(serverDir, "index.js");
+const outputDir = path.join(root, ".output");
 const tempDir = path.join(root, ".hostinger-dist-temp");
+
+const publicDirCandidates = [
+  path.join(outputDir, "public"),
+  path.join(distDir, "client"),
+  path.join(distDir, "public"),
+];
+const serverEntryCandidates = [
+  path.join(outputDir, "server", "index.mjs"),
+  path.join(outputDir, "server", "index.js"),
+  path.join(distDir, "server", "index.mjs"),
+  path.join(distDir, "server", "index.js"),
+];
+
+const publicDir = publicDirCandidates.find((candidate) => existsSync(candidate));
+const serverEntry = serverEntryCandidates.find((candidate) => existsSync(candidate));
 
 // Edit this list to add more routes to prerender.
 const staticRoutes = ["/", "/about", "/contact", "/products"];
@@ -51,23 +61,34 @@ async function copyContents(from, to) {
   );
 }
 
-if (!existsSync(clientDir) || !(await stat(clientDir)).isDirectory()) {
-  console.log("Hostinger dist step skipped: dist/client was not created.");
-  process.exit(0);
+if (!publicDir || !(await stat(publicDir)).isDirectory()) {
+  console.error(
+    "[hostinger] No public build output found. Checked: " +
+      publicDirCandidates.map((candidate) => path.relative(root, candidate)).join(", "),
+  );
+  process.exit(1);
 }
 
-if (!existsSync(serverEntry)) {
-  console.log("Hostinger dist step skipped: server entry missing at " + serverEntry);
-  process.exit(0);
+if (!serverEntry) {
+  console.error(
+    "[hostinger] No server entry found. Checked: " +
+      serverEntryCandidates.map((candidate) => path.relative(root, candidate)).join(", "),
+  );
+  process.exit(1);
 }
 
 console.log("[hostinger] Prerendering routes via built worker...");
 const workerMod = await import(pathToFileURL(serverEntry).href);
-const worker = workerMod.default;
+const worker = workerMod.default ?? workerMod;
 if (!worker || typeof worker.fetch !== "function") {
   console.error("[hostinger] Worker entry does not export fetch handler.");
   process.exit(1);
 }
+
+// Start with only the browser-safe public files. Server output is never copied.
+await safeRemove(tempDir);
+await mkdir(tempDir, { recursive: true });
+await copyContents(publicDir, tempDir);
 
 const ctx = { waitUntil() {}, passThroughOnException() {} };
 for (const route of routes) {
@@ -80,8 +101,8 @@ for (const route of routes) {
     const html = await res.text();
     const outPath =
       route === "/"
-        ? path.join(clientDir, "index.html")
-        : path.join(clientDir, route.replace(/^\//, ""), "index.html");
+        ? path.join(tempDir, "index.html")
+        : path.join(tempDir, route.replace(/^\//, ""), "index.html");
     await mkdir(path.dirname(outPath), { recursive: true });
     await writeFile(outPath, html, "utf8");
     console.log(`[hostinger] wrote ${path.relative(root, outPath)}`);
@@ -91,25 +112,26 @@ for (const route of routes) {
 }
 
 // Ensure 404.html exists (used by Hostinger and as SPA fallback)
-const notFoundPath = path.join(clientDir, "404.html");
+const notFoundPath = path.join(tempDir, "404.html");
 if (!existsSync(notFoundPath)) {
-  const fallback = path.join(clientDir, "index.html");
+  const fallback = path.join(tempDir, "index.html");
   if (existsSync(fallback)) {
     await writeFile(notFoundPath, await readFile(fallback, "utf8"), "utf8");
   }
 }
 
-// Flatten dist: keep only the static client output at dist/ root.
-await safeRemove(tempDir);
-await mkdir(tempDir, { recursive: true });
-await copyContents(clientDir, tempDir);
-
-await safeRemove(serverDir);
-await safeRemove(buildsDir);
-await safeRemove(clientDir);
+// Recreate dist from scratch so client/, server/, and build metadata cannot remain.
+await safeRemove(distDir);
+await mkdir(distDir, { recursive: true });
 await copyContents(tempDir, distDir);
 await safeRemove(tempDir);
+await safeRemove(outputDir);
+
+if (!existsSync(path.join(distDir, "index.html"))) {
+  console.error("[hostinger] Static build failed: dist/index.html was not generated.");
+  process.exit(1);
+}
 
 console.log(
-  "[hostinger] Build ready. Upload the contents of dist/ into public_html/.",
+  "[hostinger] Static dist ready: index.html and browser assets only. Upload the contents of dist/ into public_html/.",
 );
