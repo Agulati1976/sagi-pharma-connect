@@ -16,7 +16,20 @@ export interface Product {
   category: ProductCategory;
   form: ProductForm;
   tagline?: string;
+  image?: string;
 }
+
+import sagiD3Asset from "@/assets/products/sagi-d3.jpg.asset.json";
+import saghealAsset from "@/assets/products/sagheal.jpg.asset.json";
+import sagpin400Asset from "@/assets/products/sagpin-400.jpg.asset.json";
+import sagnorPgAsset from "@/assets/products/sagnor-pg.jpg.asset.json";
+
+const productImages: Record<string, string> = {
+  "Sagi D3": sagiD3Asset.url,
+  "SAGHEAL": saghealAsset.url,
+  "SAGPIN-100/400": sagpin400Asset.url,
+  "Sagnor-PG": sagnorPgAsset.url,
+};
 
 export function slugify(name: string): string {
   return name
@@ -112,7 +125,7 @@ export const categoryInfo: Record<
   },
 };
 
-export const products: Product[] = [
+const productsRaw: Product[] = [
   {
     name: "Q-SAG-PLUS",
     composition:
@@ -258,6 +271,11 @@ export const products: Product[] = [
     tagline: "The Approved Potency, Fungicidal Specialist",
   },
 ];
+
+export const products: Product[] = productsRaw.map((p) => ({
+  ...p,
+  image: productImages[p.name],
+}));
 
 export const categories: ProductCategory[] = [
   "Bone & Joint",
