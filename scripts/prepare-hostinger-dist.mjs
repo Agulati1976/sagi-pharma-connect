@@ -10,7 +10,9 @@ const distDir = path.join(root, "dist");
 const clientDir = path.join(distDir, "client");
 const serverDir = path.join(distDir, "server");
 const buildsDir = path.join(distDir, ".builds");
-const serverEntry = path.join(serverDir, "index.js");
+const serverEntry = existsSync(path.join(serverDir, "index.mjs"))
+  ? path.join(serverDir, "index.mjs")
+  : path.join(serverDir, "index.js");
 const tempDir = path.join(root, ".hostinger-dist-temp");
 
 // Edit this list to add more routes to prerender.
