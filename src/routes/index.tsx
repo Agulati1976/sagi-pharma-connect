@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
           "SAGI Pharmaceutical offers a comprehensive portfolio of 20+ research-backed formulations across bone care, gastro, pain, neuro, anti-infectives and nutraceuticals.",
       },
       { property: "og:title", content: "SAGI Pharmaceutical — Trusted Healthcare Formulations" },
-      { property: "og:description", content: "Research-backed pharmaceutical formulations from Delhi, India." },
+      { property: "og:description", content: "SAGI Pharmaceutical offers a comprehensive portfolio of 20+ research-backed formulations across bone care, gastro, pain, neuro, anti-infectives and nutraceuticals." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
