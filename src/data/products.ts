@@ -272,6 +272,11 @@ const productsRaw: Product[] = [
   },
 ];
 
+export const products: Product[] = productsRaw.map((p) => ({
+  ...p,
+  image: productImages[p.name],
+}));
+
 export const categories: ProductCategory[] = [
   "Bone & Joint",
   "Gastro",
