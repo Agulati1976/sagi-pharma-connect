@@ -14,6 +14,16 @@ export function ProductCard({ product }: { product: Product }) {
       aria-label={`View ${product.name} details`}
     >
       <Card className="h-full overflow-hidden border-border/70 transition-all group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-[var(--shadow-card)]">
+        {product.image ? (
+          <div className="aspect-[4/3] overflow-hidden bg-secondary/40">
+            <img
+              src={product.image}
+              alt={`${product.name} packaging`}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+        ) : null}
         <CardContent className="flex h-full flex-col gap-3 p-6">
           <div className="flex items-start justify-between gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
