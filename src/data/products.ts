@@ -25,6 +25,10 @@ import sagpin400Asset from "@/assets/products/sagpin-400.jpg.asset.json";
 import sagnorPgAsset from "@/assets/products/sagnor-pg.jpg.asset.json";
 import qSagPlusAsset from "@/assets/products/q-sag-plus.jpg.asset.json";
 import acesagThAsset from "@/assets/products/acesag-th.jpg.asset.json";
+import tromisagForteAsset from "@/assets/products/tromisag-forte.jpg.asset.json";
+import sagproLbAsset from "@/assets/products/sagpro-lb.jpg.asset.json";
+import saglyPlusAsset from "@/assets/products/sagly-plus.jpg.asset.json";
+import sagicalStrongAsset from "@/assets/products/sagical-strong.jpg.asset.json";
 
 const productImages: Record<string, string> = {
   "Sagi D3": sagiD3Asset.url,
@@ -33,7 +37,12 @@ const productImages: Record<string, string> = {
   "Sagnor-PG": sagnorPgAsset.url,
   "Q-SAG-PLUS": qSagPlusAsset.url,
   "ACESAG-TH": acesagThAsset.url,
+  "Tromisag-Forte": tromisagForteAsset.url,
+  "SAGPRO-LB": sagproLbAsset.url,
+  "SAGLY-PLUS": saglyPlusAsset.url,
+  "Sagical Strong": sagicalStrongAsset.url,
 };
+
 
 export function slugify(name: string): string {
   return name
