@@ -90,20 +90,33 @@ function ProductDetail() {
             >
               <ArrowLeft className="h-4 w-4" /> Back to products
             </Link>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <Badge variant="secondary" className="bg-white/15 text-white border-white/20">
-                {product.category}
-              </Badge>
-              <Badge variant="secondary" className="bg-white/15 text-white border-white/20">
-                {product.form}
-              </Badge>
+            <div className="mt-6 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary" className="bg-white/15 text-white border-white/20">
+                    {product.category}
+                  </Badge>
+                  <Badge variant="secondary" className="bg-white/15 text-white border-white/20">
+                    {product.form}
+                  </Badge>
+                </div>
+                <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold md:text-5xl">
+                  {product.name}
+                </h1>
+                {product.tagline && (
+                  <p className="mt-3 max-w-2xl text-lg text-white/85">{product.tagline}</p>
+                )}
+              </div>
+              {product.image ? (
+                <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl md:w-80">
+                  <img
+                    src={product.image}
+                    alt={`${product.name} packaging`}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ) : null}
             </div>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold md:text-5xl">
-              {product.name}
-            </h1>
-            {product.tagline && (
-              <p className="mt-3 max-w-2xl text-lg text-white/85">{product.tagline}</p>
-            )}
           </div>
         </section>
 
