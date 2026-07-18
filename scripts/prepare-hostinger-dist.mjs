@@ -10,7 +10,9 @@ const distDir = path.join(root, "dist");
 const clientDir = path.join(distDir, "client");
 const serverDir = path.join(distDir, "server");
 const buildsDir = path.join(distDir, ".builds");
-const serverEntry = path.join(serverDir, "index.js");
+const serverEntry = existsSync(path.join(serverDir, "index.mjs"))
+  ? path.join(serverDir, "index.mjs")
+  : path.join(serverDir, "index.js");
 const tempDir = path.join(root, ".hostinger-dist-temp");
 
 // Edit this list to add more routes to prerender.
@@ -55,7 +57,7 @@ if (!existsSync(clientDir) || !(await stat(clientDir)).isDirectory()) {
 }
 
 if (!existsSync(serverEntry)) {
-  console.log("Hostinger dist step skipped: dist/server/index.js missing.");
+  console.log("Hostinger dist step skipped: server entry missing at " + serverEntry);
   process.exit(0);
 }
 
