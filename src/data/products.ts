@@ -19,29 +19,19 @@ export interface Product {
   image?: string;
 }
 
-import sagiD3Asset from "@/assets/products/sagi-d3.jpg.asset.json";
-import saghealAsset from "@/assets/products/sagheal.jpg.asset.json";
-import sagpin400Asset from "@/assets/products/sagpin-400.jpg.asset.json";
-import sagnorPgAsset from "@/assets/products/sagnor-pg.jpg.asset.json";
-import qSagPlusAsset from "@/assets/products/q-sag-plus.jpg.asset.json";
-import acesagThAsset from "@/assets/products/acesag-th.jpg.asset.json";
-import tromisagForteAsset from "@/assets/products/tromisag-forte.jpg.asset.json";
-import sagproLbAsset from "@/assets/products/sagpro-lb.jpg.asset.json";
-import saglyPlusAsset from "@/assets/products/sagly-plus.jpg.asset.json";
-import sagicalStrongAsset from "@/assets/products/sagical-strong.jpg.asset.json";
-
 const productImages: Record<string, string> = {
-  "Sagi D3": sagiD3Asset.url,
-  "SAGHEAL": saghealAsset.url,
-  "SAGPIN-100/400": sagpin400Asset.url,
-  "Sagnor-PG": sagnorPgAsset.url,
-  "Q-SAG-PLUS": qSagPlusAsset.url,
-  "ACESAG-TH": acesagThAsset.url,
-  "Tromisag-Forte": tromisagForteAsset.url,
-  "SAGPRO-LB": sagproLbAsset.url,
-  "SAGLY-PLUS": saglyPlusAsset.url,
-  "Sagical Strong": sagicalStrongAsset.url,
+  "Sagi D3": "/products/sagi-d3.jpg",
+  "SAGHEAL": "/products/sagheal.jpg",
+  "SAGPIN-100/400": "/products/sagpin-400.jpg",
+  "Sagnor-PG": "/products/sagnor-pg.jpg",
+  "Q-SAG-PLUS": "/products/q-sag-plus.jpg",
+  "ACESAG-TH": "/products/acesag-th.jpg",
+  "Tromisag-Forte": "/products/tromisag-forte.jpg",
+  "SAGPRO-LB": "/products/sagpro-lb.jpg",
+  "SAGLY-PLUS": "/products/sagly-plus.jpg",
+  "Sagical Strong": "/products/sagical-strong.jpg",
 };
+
 
 
 export function slugify(name: string): string {
